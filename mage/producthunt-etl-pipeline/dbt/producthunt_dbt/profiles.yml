@@ -1,0 +1,19 @@
+base:
+  outputs:
+    dev:
+      type: duckdb
+  target: dev
+producthunt_dbt:
+  outputs:
+    dev:
+      dataset: dbt_producthunt_test
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      keyfile: /home/src/my-creds.json
+      location: US
+      method: service-account
+      priority: interactive
+      project: evident-time-410307
+      threads: 4
+      type: bigquery
+  target: dev

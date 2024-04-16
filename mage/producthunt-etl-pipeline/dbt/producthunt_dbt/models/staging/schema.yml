@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: staging
+    database: evident-time-410307
+    schema: product_hunt
+
+    tables:
+      - name: product_hunt_products_materialized
+      - name: product_category_materialized
