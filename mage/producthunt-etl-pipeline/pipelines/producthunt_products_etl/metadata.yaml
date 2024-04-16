@@ -1,0 +1,102 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - upload_to_gcs_products
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: load_from_kaggle
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: load_from_kaggle
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - gcs_to_bigquery_products_sql
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: upload_to_gcs_products
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - load_from_kaggle
+  uuid: upload_to_gcs_products
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    data_provider: bigquery
+    data_provider_profile: default
+    dbt: {}
+    disable_query_preprocessing: false
+    export_write_policy: append
+    limit: 1000
+    use_raw_sql: true
+  downstream_blocks:
+  - trigger_category_pipeline
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: gcs_to_bigquery_products.sql
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - upload_to_gcs_products
+  uuid: gcs_to_bigquery_products_sql
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    data_provider: bigquery
+    data_provider_profile: default
+    export_write_policy: append
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: trigger_category_pipeline
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - gcs_to_bigquery_products_sql
+  uuid: trigger_category_pipeline
+cache_block_output_in_memory: false
+callbacks: []
+concurrency_config: {}
+conditionals: []
+created_at: '2024-04-16 17:51:36.433770+00:00'
+data_integration: null
+description: null
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: producthunt_products_etl
+notification_config: {}
+remote_variables_dir: null
+retry_config: {}
+run_pipeline_in_one_process: false
+settings:
+  triggers: null
+spark_config: {}
+tags:
+- de-project
+type: python
+uuid: producthunt_products_etl
+variables_dir: /root/.mage_data/producthunt-etl-pipeline
+widgets: []
