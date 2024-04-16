@@ -9,11 +9,11 @@ producthunt_dbt:
       dataset: dbt_producthunt_test
       job_execution_timeout_seconds: 300
       job_retries: 1
-      keyfile: /home/src/my-creds.json
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
       location: US
       method: service-account
       priority: interactive
-      project: evident-time-410307
+      project: "{{ env_var('GCP_PROJECT_ID') }}"
       threads: 4
       type: bigquery
   target: dev
