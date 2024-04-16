@@ -44,7 +44,7 @@ The [dataset](https://components.one/datasets/product-hunt-products) includes 76
 | makers                    | a list of the usersnames of the makers                            | string |
 ## Project Architecture
 <p align="center">
-    <img src="https://github.com/maneshkarun/producthunt-product-etl-pipeline/blob/main/images/Producthunt-architecture.png"
+    <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/Producthunt-architecture.pngs"
       alt="Product Hunt Data Extraction and Analysis Pipeline Architecture"
       style="margin-right: 10px;">
 
