@@ -61,6 +61,7 @@ The [dataset](https://components.one/datasets/product-hunt-products) includes 76
 2. Go to Settings > Account > API > Create New Token
 3. Open the downloadeded file and copy the API key.
 
+
 1. Clone the repository
 ```bash
 git clone https://github.com/maneshkarun/producthunt-product-etl-pipeline.git
@@ -102,32 +103,33 @@ cp dev.env .env
 rm dev.env
 touch .env
 ```
-Make the following entries in the .env file
+Before spinning up the Docker containers, ensure you have set the following environment variables in the .env file
 ```bash
 PROJECT_NAME=producthunt-etl-pipeline
 GCP_PROJECT_ID=<enter your project id>
 GCP_BUCKET_NAME=<enter your bucket name>
-GOOGLE_APPLICATION_CREDENTIALS=<path to your service account json file>
+GOOGLE_APPLICATION_CREDENTIALS=/home/src/my-creds.json
 
 # kaggle
 KAGGLE_USERNAME=<enter your kaggle username>
 KAGGLE_KEY=<enter your kaggle key>
 ```
-```bash
-
-```
-1. Copy paste service account key file in the mage directory and rename it to `my-creds.json`
-2. Spin up the docker containers
+4. Spin up the docker containers
 ```bash
 docker-compose up -d
 ```
 1. Open the browser and navigate to `http://localhost:6789` to access the Mage
-2. Upload the pipeline file 'producthunt_etl.zip' to the Mage
-   <p align="center">
-    <img src="
-3. Navigate to the `Pipelines` tab and click on the `producthunt-etl-pipeline` pipeline
-4. Click on the `Run` button to run the pipeline
+2. Navigate to the `Pipelines` tab and click on the `producthunt_products_etl` pipeline > `Edit Pipeline`
+3. In the right pane, click on the variables tab and edit the variable `gcs_filepath_products`
+4. Change the value to `gs://<your-gcs-bucket-name>/product_hunt_data/product_hunt_products/*` modify with your GCS bucket name
+5. Navigate to the `Pipeines` tab and click on the `producthunt_products_category_etl` pipeline
+6. In the right pane, click on the variables tab and edit the variable `gcs_filepath_products_category`
+7. Change the value to `gs://<your-gcs-bucket-name>/product_hunt_data/product_hunt_products_category/*` modify with your GCS bucket name
+8. Go the `Pipelines` tab and click on the `producthunt_products_etl` pipeline > `Edit pipeline` and go to last leaf node block `trigger_category_pipeline` under more options, click `Execute with all upstream blocks`
 
+This should also trigger the remaining two pipelines `producthunt_products_category_etl` and `dbt_transformation` automatically. Go back to dashboard and check the status of the pipelines.
+
+This might take a while to complete. Once the pipelines are completed, you can check the data in the BigQuery and GCS bucket.
 
 ## Dashboard
 <p align="center">
