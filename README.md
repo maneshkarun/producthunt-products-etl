@@ -148,6 +148,7 @@ docker-compose up -d
   <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/gcs_to_bigquery_products_sql.png"
     alt="GCS to BigQuery Category SQL Block"
     style="margin-right: 10px;">
+
   - Go to `gcs_to_bigquery_products_sql` block and modify the hightlighted phrases to your GCS bucket name.
   <!-- - In the right pane, click on the variables tab and edit the variable `gcs_filepath_products`
   - Change the value to `gs://<your-gcs-bucket-name>/product_hunt_data/product_hunt_products/*` modify with your GCS bucket name. Make sure that the value of the variable is enclosed in quotes. -->
@@ -156,6 +157,7 @@ docker-compose up -d
   <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/gcs_to_bigquery_category.png"
     alt="GCS to BigQuery Category SQL Block"
     style="margin-right: 10px;">
+    
   - Go to `gcs_to_bigquery_category` block and modify the hightlighted phrases to your GCS bucket name.
   <!-- - In the right pane, click on the variables tab and edit the variable `gcs_filepath_products_category`
   - Change the value to `gs://<your-gcs-bucket-name>/product_hunt_data/product_hunt_products_category/*` modify with your GCS bucket name. Make sure that the value of the variable is enclosed in quotes. -->
