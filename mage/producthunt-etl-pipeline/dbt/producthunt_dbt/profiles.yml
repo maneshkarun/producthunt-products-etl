@@ -6,7 +6,7 @@ base:
 producthunt_dbt:
   outputs:
     dev:
-      dataset: dbt_producthunt_test
+      dataset: dbt_producthunt
       job_execution_timeout_seconds: 300
       job_retries: 1
       keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
