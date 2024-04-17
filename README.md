@@ -86,7 +86,8 @@ nano variables.tf
 ```
 - Make the following changes in the variables of the `variables.tf` file
   - `project_id` - enter your GCP project id
-  - `gcs_bucket_name` - enter your GCS bucket name \n
+  - `gcs_bucket_name` - enter your GCS bucket name
+  
 **I recommend you not to change the default value of `bq_dataset_name`. If you want to change, please make sure to modify the SQL queries of data exporter blocks and schema.yml of the dbt model inside Mage to represent the same.**
 ```bash
 terraform init
