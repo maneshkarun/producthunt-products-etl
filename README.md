@@ -144,7 +144,7 @@ docker-compose up -d
 - Access the Mage UI
   - Open the browser and navigate to `http://localhost:6789` to access the Mage
   - Navigate to the `Pipelines` tab and click on the `producthunt_products_etl` pipeline > `Edit Pipeline`
-<p align="center"
+- <p align="center"
   <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/gcs_to_bigquery_products_sql.png"
     alt="GCS to BigQuery Category SQL Block"
     style="margin-right: 10px;">
