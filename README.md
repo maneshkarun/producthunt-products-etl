@@ -164,6 +164,8 @@ This might take a while to complete [~ 10 mins]. Once the pipelines are complete
 Feel free to explore the models created in the dbt project. You can find the dbt project in the `producthunt-etl-pipeline` > `dbt` > `producthunt_dbt` directory inside Mage.
 
 ## Dashboard
-Checkout the Looker dashboard [here](https://lookerstudio.google.com/s/sR6g0Zjlzpg)
+Checkout the Looker dashboard [here](https://lookerstudio.google.com/reporting/0a751ed6-a5fb-4723-a892-405f248dc8a7)
 <p align="center">
-    <img src="
+    <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/Producthunt-Analysis-Dashboard_page-1.jpg"
+      alt="Product Hunt Dashboard - Page 1"
+      style="margin-right: 10px;">
