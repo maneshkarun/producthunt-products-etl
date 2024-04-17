@@ -145,7 +145,7 @@ docker-compose up -d
   - Open the browser and navigate to `http://localhost:6789` to access the Mage
   - Navigate to the `Pipelines` tab and click on the `producthunt_products_etl` pipeline > `Edit Pipeline`
 Go to `gcs_to_bigquery_products_sql` block and modify the hightlighted phrases to your GCS bucket name.
-<p align="center"
+<p align="center">
   <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/gcs_to_bigquery_products_sql.png"
     alt="GCS to BigQuery Category SQL Block"
     style="margin-right: 10px;">
@@ -154,10 +154,11 @@ Go to `gcs_to_bigquery_products_sql` block and modify the hightlighted phrases t
   
   - Navigate to the `Pipeines` tab and click on the `producthunt_products_category_etl` pipeline > `Edit Pipeline`
 Go to `gcs_to_bigquery_category` block and modify the hightlighted phrases to your GCS bucket name.
-<p align="center"
+<p align="center">
   <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/gcs_to_bigquery_category.png"
     alt="GCS to BigQuery Category SQL Block"
     style="margin-right: 10px;">
+
     
   <!-- - In the right pane, click on the variables tab and edit the variable `gcs_filepath_products_category`
   - Change the value to `gs://<your-gcs-bucket-name>/product_hunt_data/product_hunt_products_category/*` modify with your GCS bucket name. Make sure that the value of the variable is enclosed in quotes. -->
