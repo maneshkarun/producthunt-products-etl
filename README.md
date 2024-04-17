@@ -69,8 +69,8 @@ git clone https://github.com/maneshkarun/producthunt-product-etl-pipeline.git
 ```bash
 cd terraform
 touch variables.tf
-Make the following changes in the variables.tf file
 ```
+Make the following changes in the variables.tf file with your GCP project ID, BigQuery dataset name and GCS bucket name
 ```bash
 variable "project" {
   description = "The project ID"
@@ -88,27 +88,35 @@ variable "gcs_bucket_name" {
 }
 ```
 ```bash
+terraform init
 terraform apply
 ```
 3. Change the directory
 ```bash
 cd ..
 cd mage
-Copy and Paste your google service account key file in the mage directory and rename it to my-creds.json
+```
+Copy and Paste your google service account key file in the mage directory and rename it to `my-creds.json`
 ```bash
-
+cp dev.env .env
+rm dev.env
 touch .env
-Make the following entries in the .env file
 ```
+Make the following entries in the .env file
 ```bash
-GCP_PROJECT_ID=<your-gcp-project-id>
-GCP_BUCKET_NAME=<your-gcp-bucket-name>
-GOOGLE_APPLICATION_CREDENTIALS=<path-to-your-service-account-key-file>
+PROJECT_NAME=producthunt-etl-pipeline
+GCP_PROJECT_ID=<enter your project id>
+GCP_BUCKET_NAME=<enter your bucket name>
+GOOGLE_APPLICATION_CREDENTIALS=<path to your service account json file>
+
+# kaggle
+KAGGLE_USERNAME=<enter your kaggle username>
+KAGGLE_KEY=<enter your kaggle key>
 ```
 ```bash
 
 ```
-4. Copy paste service account key file in the mage directory and rename it to `my-creds.json`
+1. Copy paste service account key file in the mage directory and rename it to `my-creds.json`
 2. Spin up the docker containers
 ```bash
 docker-compose up -d
