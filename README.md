@@ -3,6 +3,7 @@
 - [Product Hunt Data Extraction and Analysis Pipeline](#product-hunt-data-extraction-and-analysis-pipeline)
   - [Quick Access](#quick-access)
   - [Project description](#project-description)
+  - [Pipeline Architecture](#pipeline-architecture)
   - [Dataset description](#dataset-description)
   - [Project Architecture](#project-architecture)
   - [Want to run the project?](#want-to-run-the-project)
@@ -18,7 +19,6 @@
       - [4. Spin up the docker containers](#4-spin-up-the-docker-containers)
       - [5. DBT](#5-dbt)
   - [Dashboard](#dashboard)
-  - [Want to connect with me?](#want-to-connect-with-me)
 
 ## Project description
 [Product Hunt](https://www.producthunt.com/about) is a platform that allows users to share and discover new products. It is a community-driven platform that allows users to upvote products they like and comment on them. The platform is a great way to discover new products and keep up with the latest trends in technology. 
@@ -27,30 +27,47 @@ This project is an end-to-end pipeline which is designed to extract data of prod
  
 1. **Data Extraction**: The [dataset](https://www.kaggle.com/datasets/maneshkarun/producthunt-products-dataset-2014-2021) is downloaded using Kaggle API
 2. **Data Storage**: The data is stored in GCS and later loaded into BigQuery
-3. **Data Transformation**: The data made available in BigQuery is transformed using dbt
+3. **Data Transformation**: The data made available in BigQuery is transformed using dbt and stored in BigQuery
 4. **Data Visualization**: The data is then visualized using Data Looker Studio
 
 Welcome to the adventure of data exploration on Product Hunt. 👋
+
+## Pipeline Architecture
+- There are three pipelines in this project
+  - **producthunt_products_etl**: This pipeline is responsible for extracting the data from Kaggle, storing it in GCS, loading the data into BigQuery, and triggering the next pipeline
+  - **producthunt_products_category_etl**: This pipeline is responsible for extracting the data from BigQuery, transforming the data using dbt, and storing it in BigQuery
+  - **dbt_transformation**: This pipeline is responsible for transforming the data using dbt and storing it in BigQuery
+- The pipeline architecture is as follows
+<p align="center">
+  <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/producthunt_products_etl.png" alt="Image 1" style="margin-right: 10px;">
+  <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/producthunt_products_category_etl.png" alt="Image 2" style="margin-right: 10px;">
+  <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/dbt_transformation.png" alt="Image 3">
+</p>
+<p align="center">
+  <em>Image 1 Caption</em> | <em>Image 2 Caption</em> | <em>Image 3 Caption</em>
+</p>
+
 
 ## Dataset description
 
 The [dataset](https://www.kaggle.com/datasets/maneshkarun/producthunt-products-dataset-2014-2021) includes 76,822 total products from year 2014-2021. It includes the following columns:
 
-| Column Name               | Description                                                       | Type   |
-|---------------------------|-------------------------------------------------------------------|--------|
-| _id                       | the product page URL                                              | string |
-| last_updated              | the most recent UTC datetime the row's values were updated        | string |
-| name                      | the product's name                                                | string |
-| product_description       | the short description of the product on its page                  | string |
-| release_date              | the date the product was published to Product Hunt                | string |
-| product_of_the_day_date   | the day the product received the Product of the Day distinction   | string |
-| product_ranking           | the Product of the Day ranking it received, if applicable.        | string |
-| main_image                | URL of the product image.                                         | string |
-| upvotes                   | he number of upvotes received as of the last updated column       | string |
-| websites                  | the product's website(s)                                          | string |
-| category_tags             | the product's list of category tags                               | string |
-| hunter                    | the username of the hunter                                        | string |
-| makers                    | a list of the usersnames of the makers                            | string |
+| Column Name               | Description                                                       | Type     |
+|---------------------------|-------------------------------------------------------------------|----------|
+| _id                       | the product page URL                                              | string   |
+| last_updated              | the most recent UTC datetime the row's values were updated        | datetime |
+| name                      | the product's name                                                | string   |
+| product_description       | the short description of the product on its page                  | string   |
+| release_date              | the date the product was published to Product Hunt                | datetime |
+| product_of_the_day_date   | the day the product received the Product of the Day distinction   | datetime |
+| product_ranking           | the Product of the Day ranking it received, if applicable.        | integer  |
+| main_image                | URL of the product image.                                         | string   |
+| upvotes                   | he number of upvotes received as of the last updated column       | integer  |
+| websites                  | the product's website(s)                                          | string   |
+| category_tags             | the product's list of category tags                               | string   |
+| hunter                    | the username of the hunter                                        | string   |
+| makers                    | a list of the usersnames of the makers                            | string   |
+
 ## Project Architecture
 <p align="center">
     <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/Producthunt-architecture.png"
@@ -59,11 +76,6 @@ The [dataset](https://www.kaggle.com/datasets/maneshkarun/producthunt-products-d
 
 ## Want to run the project?
 ### Pre-requisites
-<!-- - Docker
-- [Docker Compose]()
-- [Google Cloud Platform Account]()
-- [Terraform]()
-- Kaggle API Key -->
 
 #### 1. Setup your GCP Account
 #### 2. Docker Installation
@@ -107,10 +119,10 @@ nano .env
 ```
 Before spinning up the Docker containers, ensure you have set the following environment variables in the .env file
 
-  - `GCP_PROJECT_ID`=enter your GCP project id
-  - `GCP_BUCKET_NAME`=enter your GCS bucket name
-  - `KAGGLE_USERNAME`=enter your kaggle username
-  - `KAGGLE_KEY`=enter your kaggle key
+  - `GCP_PROJECT_ID=<enter your GCP project id>`
+  - `GCP_BUCKET_NAME=<enter your GCS bucket name>`
+  - `KAGGLE_USERNAME=<enter your kaggle username>`
+  - `KAGGLE_KEY=<enter your kaggle key>`
 
 #### 4. Spin up the docker containers
 ```bash
@@ -130,8 +142,8 @@ This should also trigger the remaining two pipelines `producthunt_products_categ
 
 This might take a while to complete [~ 10 mins]. Once the pipelines are completed, you can check the data in the BigQuery and GCS bucket.
 
-- GCS Bucket      : product_hunt_data
-- BigQuery Dataset: product_hunt
+- **Folder name in GCS bucket**: `product_hunt_data`
+- **BigQuery Dataset**: `product_hunt`
 
 #### 5. DBT
 - Transformed tables can be found in the BigQuery dataset `dbt_producthunt`
@@ -141,6 +153,3 @@ Feel free to explore the models created in the dbt project. You can find the dbt
 ## Dashboard
 <p align="center">
     <img src="
-
-##  Want to connect with me?
-- [LinkedIn](https://www.linkedin.com/in/manesh-karun/)
