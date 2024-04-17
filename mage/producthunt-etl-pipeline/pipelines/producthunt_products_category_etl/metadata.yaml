@@ -10,12 +10,12 @@ blocks:
   language: python
   name: load_from_local
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: data_loader
   upstream_blocks: []
   uuid: load_from_local
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: null
   configuration: {}
   downstream_blocks:
@@ -26,13 +26,13 @@ blocks:
   language: python
   name: explode_category_column
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: transformer
   upstream_blocks:
   - load_from_local
   uuid: explode_category_column
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: null
   configuration: {}
   downstream_blocks:
@@ -115,5 +115,7 @@ tags:
 - de-project
 type: python
 uuid: producthunt_products_category_etl
+variables:
+  gcs_filepath_products_category: '''gs://evident-time-410307-example-bucket/product_hunt_data_test/product_category/*'''
 variables_dir: /root/.mage_data/producthunt-etl-pipeline
 widgets: []

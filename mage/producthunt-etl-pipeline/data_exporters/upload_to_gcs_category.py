@@ -5,6 +5,7 @@ from dotenv import main
 
 if 'data_exporter' not in globals():
     from mage_ai.data_preparation.decorators import data_exporter
+from mage_ai.data_preparation.variable_manager import set_global_variable
 
 
 bucket_name = os.getenv('GCP_BUCKET_NAME')
@@ -14,6 +15,9 @@ folder_name = 'product_hunt_data_test'
 table_name = f"{folder_name}/product_category"
 
 root_path = f"{bucket_name}/{table_name}"
+
+# gs_path =  f"gs://{root_path}/*"
+# set_global_variable('producthunt_products_category_etl', 'gcs_filepath_products_category', gcs_path)
 
 @data_exporter
 def export_data(data, *args, **kwargs):

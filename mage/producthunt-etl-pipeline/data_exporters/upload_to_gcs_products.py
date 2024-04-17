@@ -10,7 +10,7 @@ if 'data_exporter' not in globals():
 bucket_name = os.getenv('GCP_BUCKET_NAME')
 project_id = os.getenv('GCP_PROJECT_ID')
 
-folder_name = 'product_hunt_data_test'
+folder_name = 'product_hunt_data'
 table_name = f"{folder_name}/product_hunt_products"
 
 root_path = f"{bucket_name}/{table_name}"
@@ -28,3 +28,5 @@ def export_data(data, *args, **kwargs):
         filesystem=gcs,
         use_deprecated_int96_timestamps=True
     )
+
+    
