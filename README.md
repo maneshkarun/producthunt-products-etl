@@ -20,6 +20,7 @@
       - [2. Modify variables.tf \& run the terraform script](#2-modify-variablestf--run-the-terraform-script)
       - [3. Modify the .env file and run the docker-compose file of Mage](#3-modify-the-env-file-and-run-the-docker-compose-file-of-mage)
       - [4. Spin up the docker containers](#4-spin-up-the-docker-containers)
+        - [Access the Mage UI](#access-the-mage-ui)
       - [5. DBT](#5-dbt)
   - [Dashboard](#dashboard)
 
@@ -141,7 +142,8 @@ Before spinning up the Docker containers, ensure you have set the following envi
 ```bash
 docker-compose up -d
 ```
-- Access the Mage UI
+##### Access the Mage UI
+
   - Open the browser and navigate to `http://localhost:6789` to access the Mage
   - Navigate to the `Pipelines` tab and click on the `producthunt_products_etl` pipeline > `Edit Pipeline`
 Go to `gcs_to_bigquery_products_sql` block and modify the hightlighted phrases to your GCS bucket name.
