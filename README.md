@@ -60,7 +60,7 @@ The [dataset](https://components.one/datasets/product-hunt-products) includes 76
 1. Go to the [Kaggle](https://www.kaggle.com/) and sign in
 2. Go to Settings > Account > API > Create New Token
 3. Open the downloadeded file and copy the API key.
-  
+
 1. Clone the repository
 ```bash
 git clone https://github.com/maneshkarun/producthunt-product-etl-pipeline.git
@@ -68,7 +68,26 @@ git clone https://github.com/maneshkarun/producthunt-product-etl-pipeline.git
 2. Run the terraform script
 ```bash
 cd terraform
-terraform init
+touch variables.tf
+Make the following changes in the variables.tf file
+```
+```bash
+variable "project" {
+  description = "The project ID"
+  default     = "<your-gcp-project-id>"
+}
+
+variable "bq_dataset_name" {
+  description = "The BigQuery dataset name"
+  default     = "<your-bq-dataset-name>"
+}
+
+variable "gcs_bucket_name" {
+  description = "The GCS bucket name"
+  default     = "<your-gcs-bucket-name>"
+}
+```
+```bash
 terraform apply
 ```
 3. Change the directory
