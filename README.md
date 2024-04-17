@@ -4,6 +4,9 @@
   - [Quick Access](#quick-access)
   - [Project description](#project-description)
   - [Pipeline Architecture](#pipeline-architecture)
+    - [1. **producthunt\_products\_etl**:](#1-producthunt_products_etl)
+    - [2. **producthunt\_products\_category\_etl**:](#2-producthunt_products_category_etl)
+    - [3. **dbt\_transformation**:](#3-dbt_transformation)
   - [Dataset description](#dataset-description)
   - [Project Architecture](#project-architecture)
   - [Want to run the project?](#want-to-run-the-project)
@@ -34,20 +37,30 @@ Welcome to the adventure of data exploration on Product Hunt. 👋
 
 ## Pipeline Architecture
 - There are three pipelines in this project
-  - **producthunt_products_etl**: This pipeline is responsible for extracting the data from Kaggle, storing it in GCS, loading the data into BigQuery, and triggering the next pipeline
-  - **producthunt_products_category_etl**: This pipeline is responsible for extracting the data from BigQuery, transforming the data using dbt, and storing it in BigQuery
-  - **dbt_transformation**: This pipeline is responsible for transforming the data using dbt and storing it in BigQuery
-- The pipeline architecture is as follows
+### 1. **producthunt_products_etl**:
 <p align="center">
-  <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/producthunt_products_etl.png" alt="Image 1" style="margin-right: 10px;">
-  <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/producthunt_products_category_etl.png" alt="Image 2" style="margin-right: 10px;">
-  <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/dbt_transformation.png" alt="Image 3">
-</p>
+    <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/producthunt_products_etl.png"
+      alt="Producthunt Products ETL Pipeline Architecture"
+      style="margin-right: 10px;">
+
+- This pipeline is responsible for extracting the data from Kaggle and store it locally, upload to GCS, loading the data into BigQuery, and triggering the next pipeline (producthunt_products_category_etl)
+
+### 2. **producthunt_products_category_etl**: 
 <p align="center">
-  <em>Image 1 Caption</em> | <em>Image 2 Caption</em> | <em>Image 3 Caption</em>
-</p>
+    <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/producthunt_products_category_etl.png"
+      alt="Producthunt Products ETL Pipeline Architecture"
+      style="margin-right: 10px;">
 
+- This pipeline is responsible for extratcing the category_tags column along with _id and name. Explode the category_tags column to normalize the dataset and store it in GCS, load the data into BigQuery, and trigger the next pipeline (dbt_transformation)
 
+### 3. **dbt_transformation**: 
+<p align="center">
+    <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/dbt_transformation.png"
+      alt="Product Hunt Data Extraction and Analysis Pipeline Architecture"
+      style="margin-right: 10px;">
+
+- This pipeline is responsible for transforming the data using dbt and storing it in BigQuery
+      
 ## Dataset description
 
 The [dataset](https://www.kaggle.com/datasets/maneshkarun/producthunt-products-dataset-2014-2021) includes 76,822 total products from year 2014-2021. It includes the following columns:
