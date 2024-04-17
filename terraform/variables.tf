@@ -6,21 +6,21 @@ variable "credentials" {
 }
 
 
-variable "project" {
-  description = "Project"
+variable "project_id" {
+  description = "The Project ID"
   default     = "evident-time-410307"
 }
 
 variable "region" {
   description = "Region"
   #Update the below to your desired region
-  default = "asia-south1"
+  default = "us-west1"
 }
 
 variable "location" {
   description = "Project Location"
   #Update the below to your desired location
-  default = "IN"
+  default = "US"
 }
 
 variable "bq_dataset_name" {
@@ -32,7 +32,7 @@ variable "bq_dataset_name" {
 variable "gcs_bucket_name" {
   description = "My Storage Bucket Name"
   #Update the below to a unique bucket name
-  default = "de-zoomcamp-project-review"
+  default = "producthunt-data-lake"
 }
 
 variable "gcs_storage_class" {
