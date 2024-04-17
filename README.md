@@ -135,6 +135,7 @@ This might take a while to complete [~ 10 mins]. Once the pipelines are complete
 
 #### 5. DBT
 - Transformed tables can be found in the BigQuery dataset `dbt_producthunt`
+
 Feel free to explore the models created in the dbt project. You can find the dbt project in the `producthunt-etl-pipeline` > `dbt` > `producthunt_dbt` directory inside Mage.
 
 ## Dashboard
