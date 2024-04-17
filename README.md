@@ -12,7 +12,11 @@
       - [3. Terraform Installation](#3-terraform-installation)
       - [4. Generate Kaggle API Key:](#4-generate-kaggle-api-key)
     - [Steps to run the project](#steps-to-run-the-project)
-- [kaggle](#kaggle)
+      - [1. Clone the repository](#1-clone-the-repository)
+      - [2. Modify variables.tf \& run the terraform script](#2-modify-variablestf--run-the-terraform-script)
+      - [3. Modify the .env file and run the docker-compose file of Mage](#3-modify-the-env-file-and-run-the-docker-compose-file-of-mage)
+      - [4. Spin up the docker containers](#4-spin-up-the-docker-containers)
+      - [5. DBT](#5-dbt)
   - [Dashboard](#dashboard)
   - [Want to connect with me?](#want-to-connect-with-me)
 
@@ -71,30 +75,30 @@ The [dataset](https://components.one/datasets/product-hunt-products) includes 76
   
 ### Steps to run the project
 
-- Clone the repository
+#### 1. Clone the repository
 ```bash
 git clone https://github.com/maneshkarun/producthunt-product-etl-pipeline.git
 ```
-- Modify variables.tf & run the terraform script
+#### 2. Modify variables.tf & run the terraform script
 ```bash
 cd terraform
 nano variables.tf
 ```
-Make the following changes in the variables of the `variables.tf` file
-  - `project_id` - <enter your GCP project id>
-  - `gcs_bucket_name` - <enter your GCS bucket name>
-  - `bq_dataset_name` - <enter your BigQuery dataset name>
+- Make the following changes in the variables of the `variables.tf` file
+  - `project_id` - enter your GCP project id
+  - `gcs_bucket_name` - enter your GCS bucket name
+**I recommend you not to change the default value of `bq_dataset_name`. If you want to change, please make sure to modify the SQL queries of data exporter blocks and schema.yml of the dbt model inside Mage to represent the same.**
 ```bash
 terraform init
 terraform plan
 terraform apply
 ```
-- Modify the .env file and run the docker-compose file of Mage
+#### 3. Modify the .env file and run the docker-compose file of Mage
 ```bash
 cd ..
 cd mage
 ```
-Copy and Paste your google service account key file inside the mage directory and rename it to `my-creds.json`
+- Copy and Paste your google service account key file inside the mage directory and rename it to `my-creds.json`
 ```bash
 cp dev.env .env
 rm dev.env
@@ -102,14 +106,12 @@ nano .env
 ```
 Before spinning up the Docker containers, ensure you have set the following environment variables in the .env file
 
-  - `GCP_PROJECT_ID`=<enter your GCP project id>
-  - GCP_BUCKET_NAME`=<enter your GCS bucket name>
+  - `GCP_PROJECT_ID`=enter your GCP project id
+  - `GCP_BUCKET_NAME`=enter your GCS bucket name
+  - `KAGGLE_USERNAME`=enter your kaggle username
+  - `KAGGLE_KEY`=enter your kaggle key
 
-  # kaggle
-  - `KAGGLE_USERNAME`=<enter your kaggle username>
-  - `KAGGLE_KEY`=<enter your kaggle key>
-
-- Spin up the docker containers
+#### 4. Spin up the docker containers
 ```bash
 docker-compose up -d
 ```
@@ -127,7 +129,10 @@ This should also trigger the remaining two pipelines `producthunt_products_categ
 
 This might take a while to complete. Once the pipelines are completed, you can check the data in the BigQuery and GCS bucket.
 
-- DBT
+#### 5. DBT
+- Transformed tables can be found in the BigQuery dataset `dbt_producthunt`
+Feel free to explore the models created in the dbt project. You can find the dbt project in the `producthunt-etl-pipeline` > `dbt` > `producthunt_dbt` directory inside Mage.
+
 ## Dashboard
 <p align="center">
     <img src="
