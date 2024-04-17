@@ -23,18 +23,18 @@
 ## Project description
 [Product Hunt](https://www.producthunt.com/about) is a platform that allows users to share and discover new products. It is a community-driven platform that allows users to upvote products they like and comment on them. The platform is a great way to discover new products and keep up with the latest trends in technology. 
 
-This project is an end-to-end pipeline which is designed to extract data of products available on [producthunt.com](https://www.producthunt.com/) from [here](https://components.one/datasets/product-hunt-products), transform the data using dbt and store it in a data lake and data warehouse. The data is then visualized using Looker Studio. The project is divided into 4 main components
+This project is an end-to-end pipeline which is designed to extract data of products available on [producthunt.com](https://www.producthunt.com/) from Kaggle, store it in GCS, load the data into BigQuery from GCS, transform the data using dbt and store it again in BigQuery. The data is then visualized using Looker Studio. The project is divided into 4 main components
  
-1. **Data Extraction**: The dataset can be downloaded from this [link](https://components.one/datasets/product-hunt-products)
-2. **Data Transformation**: The data made available in BigQuery is transformed using dbt
-3. **Data Storage**: The transformed data is stored in a datalake and DWH using Google Cloud Storage and BigQuery
-4. **Data Visualization**: The data is visualized using Data Looker Studio
+1. **Data Extraction**: The [dataset](https://www.kaggle.com/datasets/maneshkarun/producthunt-products-dataset-2014-2021) is downloaded using Kaggle API
+2. **Data Storage**: The data is stored in GCS and later loaded into BigQuery
+3. **Data Transformation**: The data made available in BigQuery is transformed using dbt
+4. **Data Visualization**: The data is then visualized using Data Looker Studio
 
 Welcome to the adventure of data exploration on Product Hunt. 👋
 
 ## Dataset description
 
-The [dataset](https://components.one/datasets/product-hunt-products) includes 76,822 total products from year 2014-2021. It includes the following columns:
+The [dataset](https://www.kaggle.com/datasets/maneshkarun/producthunt-products-dataset-2014-2021) includes 76,822 total products from year 2014-2021. It includes the following columns:
 
 | Column Name               | Description                                                       | Type   |
 |---------------------------|-------------------------------------------------------------------|--------|
@@ -99,7 +99,7 @@ terraform apply
 cd ..
 cd mage
 ```
-- Copy and Paste your google service account key file inside the mage directory and rename it to `my-creds.json`
+- Copy and paste your google service account key file inside the mage directory and rename it to `my-creds.json`
 ```bash
 cp dev.env .env
 rm dev.env
@@ -120,15 +120,18 @@ docker-compose up -d
   - Open the browser and navigate to `http://localhost:6789` to access the Mage
   - Navigate to the `Pipelines` tab and click on the `producthunt_products_etl` pipeline > `Edit Pipeline`
   - In the right pane, click on the variables tab and edit the variable `gcs_filepath_products`
-  - Change the value to `gs://<your-gcs-bucket-name>/product_hunt_data/product_hunt_products/*` modify with your GCS bucket name
+  - Change the value to `gs://<your-gcs-bucket-name>/product_hunt_data/product_hunt_products/*` modify with your GCS bucket name. Make sure that the value of the variable is enclosed in quotes.
   - Navigate to the `Pipeines` tab and click on the `producthunt_products_category_etl` pipeline
   - In the right pane, click on the variables tab and edit the variable `gcs_filepath_products_category`
-  - Change the value to `gs://<your-gcs-bucket-name>/product_hunt_data/product_hunt_products_category/*` modify with your GCS bucket name
-  - Go the `Pipelines` tab and click on the `producthunt_products_etl` pipeline > `Edit pipeline` and go to last leaf node block `trigger_category_pipeline` under more options, click `Execute with all upstream blocks`
+  - Change the value to `gs://<your-gcs-bucket-name>/product_hunt_data/product_hunt_products_category/*` modify with your GCS bucket name. Make sure that the value of the variable is enclosed in quotes.
+  - Go the `Pipelines` tab and click on the `producthunt_products_etl` pipeline > `Edit pipeline` and go to last node of the pipeline `trigger_category_pipeline` under more options, click `Execute with all upstream blocks`
 
 This should also trigger the remaining two pipelines `producthunt_products_category_etl` and `dbt_transformation` automatically. Go back to dashboard and check the status of the pipelines.
 
-This might take a while to complete. Once the pipelines are completed, you can check the data in the BigQuery and GCS bucket.
+This might take a while to complete [~ 10 mins]. Once the pipelines are completed, you can check the data in the BigQuery and GCS bucket.
+
+- GCS Bucket      : product_hunt_data
+- BigQuery Dataset: product_hunt
 
 #### 5. DBT
 - Transformed tables can be found in the BigQuery dataset `dbt_producthunt`
