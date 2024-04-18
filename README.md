@@ -1,23 +1,25 @@
-**Product Hunt Data Extraction and Analysis Pipeline**
-**Quick Access**
-- [Project description](#project-description)
-- [Pipeline Architecture](#pipeline-architecture)
-- [Dataset description](#dataset-description)
-- [Project Architecture](#project-architecture)
-- [Want to run the project?](#want-to-run-the-project)
-  - [Pre-requisites](#pre-requisites)
-    - [1. Setup your GCP Account](#1-setup-your-gcp-account)
-    - [2. Docker Installation](#2-docker-installation)
-    - [3. Terraform Installation](#3-terraform-installation)
-    - [4. Generate Kaggle API Key:](#4-generate-kaggle-api-key)
-  - [Steps to run the project](#steps-to-run-the-project)
-    - [1. Clone the repository](#1-clone-the-repository)
-    - [2. Modify variables.tf \& run the terraform script](#2-modify-variablestf--run-the-terraform-script)
-    - [3. Modify the .env file and run the docker-compose file of Mage](#3-modify-the-env-file-and-run-the-docker-compose-file-of-mage)
-    - [4. Spin up the docker containers](#4-spin-up-the-docker-containers)
-      - [Access the Mage UI](#access-the-mage-ui)
-    - [5. DBT](#5-dbt)
-- [Dashboard](#dashboard)
+# Product Hunt Data Extraction and Analysis Pipeline
+## Quick Access
+- [Product Hunt Data Extraction and Analysis Pipeline](#product-hunt-data-extraction-and-analysis-pipeline)
+  - [Quick Access](#quick-access)
+  - [Project description](#project-description)
+  - [Pipeline Architecture](#pipeline-architecture)
+  - [Dataset description](#dataset-description)
+  - [Project Architecture](#project-architecture)
+  - [Want to run the project?](#want-to-run-the-project)
+    - [Pre-requisites](#pre-requisites)
+      - [1. Setup your GCP Account](#1-setup-your-gcp-account)
+      - [2. Docker Installation](#2-docker-installation)
+      - [3. Terraform Installation](#3-terraform-installation)
+      - [4. Generate Kaggle API Key:](#4-generate-kaggle-api-key)
+    - [Steps to run the project](#steps-to-run-the-project)
+      - [1. Clone the repository](#1-clone-the-repository)
+      - [2. Modify variables.tf \& run the terraform script](#2-modify-variablestf--run-the-terraform-script)
+      - [3. Modify the .env file and run the docker-compose file of Mage](#3-modify-the-env-file-and-run-the-docker-compose-file-of-mage)
+      - [4. Spin up the docker containers](#4-spin-up-the-docker-containers)
+        - [Access the Mage UI](#access-the-mage-ui)
+      - [5. DBT](#5-dbt)
+  - [Dashboard](#dashboard)
 
 ## Project description
 [Product Hunt](https://www.producthunt.com/about) is a platform that allows users to share and discover new products. It is a community-driven platform that allows users to upvote products they like and comment on them. The platform is a great way to discover new products and keep up with the latest trends in technology. 
@@ -32,19 +34,30 @@ This project is an end-to-end pipeline which is designed to extract data of prod
 Welcome to the adventure of data exploration on Product Hunt. 👋
 
 ## Pipeline Architecture
-
-**There are three pipelines in this project**  
+**There are three pipelines in this project**
 <p 
 align="center">
     <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/pipelines.png"
-      alt="Product Hunt Data Extraction and Analysis Pipeline"
+      alt="Mage Pipeline Dashboard"
       style="margin-right: 10px;"    
+>
+
+<p 
+align="center">
+    <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/pipelines_all.jpg"
+      alt="Mage de-project Pipelines"
+      style="margin-right: 10px;"
 >
 
 | Pipeline Name                | Description                                                                                   |
 |------------------------------|-----------------------------------------------------------------------------------------------|
-| producthunt_products_etl     | This pipeline is responsible for extracting the data from Kaggle and store it locally, upload to GCS, loading the data into BigQuery, and triggering the next pipeline (producthunt_products_category_etl) |
-| producthunt_products_category_etl | EThis pipeline is responsible for extratcing the category_tags column along with _id and name. Explode the category_tags column to normalize the dataset and store it in GCS, load the data into BigQuery, and trigger the next pipeline (dbt_transformation) |
+| producthunt_products_etl     | This pipeline is responsible for extracting the data from Kaggle and store it locally, upload to GCS, loading the data into BigQuery, and triggering the next pipeline (producthunt_products_category_etl)
+ - Blocks:
+   - a
+   - b
+   - c
+   - d |
+| producthunt_products_category_etl | This pipeline is responsible for extratcing the category_tags column along with _id and name. Explode the category_tags column to normalize the dataset and store it in GCS, load the data into BigQuery, and trigger the next pipeline (dbt_transformation) |
 | dbt_transformation           | This pipeline is responsible for transforming the data using dbt and storing it in BigQuery                                       |
       
 ## Dataset description
