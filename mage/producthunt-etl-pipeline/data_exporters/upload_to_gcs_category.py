@@ -11,7 +11,7 @@ from mage_ai.data_preparation.variable_manager import set_global_variable
 bucket_name = os.getenv('GCP_BUCKET_NAME')
 project_id = os.getenv('GCP_PROJECT_ID')
 
-folder_name = 'product_hunt_data_test'
+folder_name = 'product_hunt_data'
 table_name = f"{folder_name}/product_category"
 
 root_path = f"{bucket_name}/{table_name}"
