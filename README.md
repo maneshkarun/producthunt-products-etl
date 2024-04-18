@@ -57,7 +57,9 @@ align="center">
       
 ## Dataset description
 
-The [dataset](https://www.kaggle.com/datasets/maneshkarun/producthunt-products-dataset-2014-2021) includes 76,822 total products from year 2014-2021. It includes the following columns:
+The dataset includes 76,822 total products from year 2014-2021. It includes the following columns:
+
+Have a look at the [dataset](https://www.kaggle.com/datasets/maneshkarun/producthunt-products-dataset-2014-2021) to understand the pipeline better.
 
 | Column Name               | Description                                                       | Type     |
 |---------------------------|-------------------------------------------------------------------|----------|
@@ -84,9 +86,9 @@ The [dataset](https://www.kaggle.com/datasets/maneshkarun/producthunt-products-d
 ## Want to run the project?
 ### Pre-requisites
 
-#### 1. Setup your GCP Account
-#### 2. Docker Installation
-#### 3. Terraform Installation
+#### 1. [Setup your GCP Account](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/01-docker-terraform/1_terraform_gcp/2_gcp_overview.md#initial-setup)
+#### 2. [Docker Installation](https://docs.docker.com/engine/install/)
+#### 3. [Terraform Installation](https://developer.hashicorp.com/terraform/install)
 #### 4. Generate Kaggle API Key:
 - Go to the [Kaggle](https://www.kaggle.com/) and sign in
 - Go to Settings > Account > API > Create New Token
@@ -137,7 +139,7 @@ docker-compose up -d
 ```
 ##### Access the Mage UI
 
-  - Open the browser and navigate to `http://localhost:6789` to access the Mage
+  - Open the browser and navigate to [http://localhost:6789] to access the Mage
   - Navigate to the `Pipelines` tab and click on the `producthunt_products_etl` pipeline > `Edit Pipeline`
 Go to `gcs_to_bigquery_products_sql` block and modify the hightlighted phrases to your GCS bucket name.
 
@@ -168,11 +170,27 @@ This might take a while to complete [~ 10 mins]. Once the pipelines are complete
 
 - **Folder name in GCS bucket**: `product_hunt_data`
 - **BigQuery Dataset**: `product_hunt`
+- **BigQuery Dataset for dbt**: `dbt_producthunt`
 
 #### 5. DBT
+
+- Feel free to explore the models created in the dbt project. You can find the dbt project in the `producthunt-etl-pipeline` > `dbt` > `producthunt_dbt` directory inside Mage.
+- 
 - Transformed tables can be found in the BigQuery dataset `dbt_producthunt`
 
-Feel free to explore the models created in the dbt project. You can find the dbt project in the `producthunt-etl-pipeline` > `dbt` > `producthunt_dbt` directory inside Mage.
+<p align="center">
+    <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/dbt-bigquery-tables.png"
+      alt="dbt transformed tables in BigQuery"
+      style="margin-right: 10px;">
+
+- dbt lineage graph
+  
+<p align="center">
+    <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/dbt-lineage-graph.png"
+      alt="dbt lineage graph"
+      style="margin-right: 10px;">
+
+
 
 ## Dashboard
 Checkout the Looker dashboard [here](https://lookerstudio.google.com/reporting/0a751ed6-a5fb-4723-a892-405f248dc8a7)
