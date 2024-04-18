@@ -156,7 +156,8 @@ This might take a while to complete [~ 8 - 10 mins]. Once the pipelines are comp
 - **Folder name in GCS bucket**: `product_hunt_data`
 - **BigQuery Dataset**: `product_hunt`
 - **BigQuery Dataset for dbt**: `dbt_producthunt`
-
+Note:
+  - The data stored in BigQuery is partitioned by `release_date`, since the data is less than 1GB, the partitioning is not necessary. But, I have partitioned the data for demonstration purposes. There is no significant performance improvement in querying the data since the data is less than 1GB.
 #### 5. DBT
 
 - Feel free to explore the models created in the dbt project. You can find the dbt project in the `producthunt-etl-pipeline` > `dbt` > `producthunt_dbt` directory inside Mage.
