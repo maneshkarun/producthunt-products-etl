@@ -51,12 +51,7 @@ align="center">
 
 | Pipeline Name                | Description                                                                                   |
 |------------------------------|-----------------------------------------------------------------------------------------------|
-| producthunt_products_etl     | This pipeline is responsible for extracting the data from Kaggle and store it locally, upload to GCS, loading the data into BigQuery, and triggering the next pipeline (producthunt_products_category_etl)
- - Blocks:
-   - a
-   - b
-   - c
-   - d |
+| producthunt_products_etl     | This pipeline is responsible for extracting the data from Kaggle and store it locally, upload to GCS, loading the data into BigQuery, and triggering the next pipeline (producthunt_products_category_etl)|
 | producthunt_products_category_etl | This pipeline is responsible for extratcing the category_tags column along with _id and name. Explode the category_tags column to normalize the dataset and store it in GCS, load the data into BigQuery, and trigger the next pipeline (dbt_transformation) |
 | dbt_transformation           | This pipeline is responsible for transforming the data using dbt and storing it in BigQuery                                       |
       
