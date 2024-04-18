@@ -44,7 +44,7 @@ align="center">
 
 <p 
 align="center">
-    <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/pipelines_all.jpg"
+    <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/producthunt_pipelines_all.jpg"
       alt="Mage de-project Pipelines"
       style="margin-right: 10px;"
 >
