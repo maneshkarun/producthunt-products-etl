@@ -175,7 +175,6 @@ This might take a while to complete [~ 10 mins]. Once the pipelines are complete
 #### 5. DBT
 
 - Feel free to explore the models created in the dbt project. You can find the dbt project in the `producthunt-etl-pipeline` > `dbt` > `producthunt_dbt` directory inside Mage.
-- 
 - Transformed tables can be found in the BigQuery dataset `dbt_producthunt`
 
 <p align="center">
@@ -190,11 +189,14 @@ This might take a while to complete [~ 10 mins]. Once the pipelines are complete
       alt="dbt lineage graph"
       style="margin-right: 10px;">
 
-
-
 ## Dashboard
 Checkout the Looker dashboard [here](https://lookerstudio.google.com/reporting/0a751ed6-a5fb-4723-a892-405f248dc8a7)
 <p align="center">
     <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/Producthunt-Analysis-Dashboard_page-1.jpg"
       alt="Product Hunt Dashboard - Page 1"
+      style="margin-right: 10px;">
+
+<p align="center">
+    <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/Producthunt-Analysis-Dashboard_page-2.jpg"
+      alt="Product Hunt Dashboard - Page 2"
       style="margin-right: 10px;">
