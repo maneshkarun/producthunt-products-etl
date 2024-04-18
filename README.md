@@ -98,7 +98,8 @@ Have a look at the [dataset](https://www.kaggle.com/datasets/maneshkarun/product
 
 #### 1. Clone the repository
 ```bash
-git clone https://github.com/maneshkarun/producthunt-product-etl-pipeline.git
+git clone https://github.com/maneshkarun/producthunt-products-etl.git
+cd producthunt-products-etl
 ```
 #### 2. Modify variables.tf & run the terraform script
 ```bash
@@ -120,7 +121,7 @@ terraform apply
 cd ..
 cd mage
 ```
-- Copy and paste your google service account key file inside the mage directory and rename it to `my-creds.json`
+- **Copy and paste your google service account key file inside the mage directory and rename it to** `my-creds.json`
 ```bash
 cp dev.env .env
 rm dev.env
@@ -139,34 +140,18 @@ docker-compose up -d
 ```
 ##### Access the Mage UI
 
-  - Open the browser and navigate to [http://localhost:6789] to access the Mage
-  - Navigate to the `Pipelines` tab and click on the `producthunt_products_etl` pipeline > `Edit Pipeline`
-Go to `gcs_to_bigquery_products_sql` block and modify the hightlighted phrases to your GCS bucket name.
+  - Open the browser and navigate to [http://localhost:6789](http://localhost:6789) to access the Mage
+  - Open Mage Terminal [install dbt dependencies] before running the pipeline
 
-Example: `gs://<your-gcs-bucket-name>/product_hunt_data/product_hunt_products/*`
-<p align="center">
-  <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/gcs_to_bigquery_products_sql.png"
-    alt="GCS to BigQuery Category SQL Block"
-    style="margin-right: 10px;">
-  <!-- - In the right pane, click on the variables tab and edit the variable `gcs_filepath_products`
-  - Change the value to `gs://<your-gcs-bucket-name>/product_hunt_data/product_hunt_products/*` modify with your GCS bucket name. Make sure that the value of the variable is enclosed in quotes. -->
-  
-  - Navigate to the `Pipeines` tab and click on the `producthunt_products_category_etl` pipeline > `Edit Pipeline`
-Go to `gcs_to_bigquery_category` block and modify the hightlighted phrases to your GCS bucket name.
-
-Example: `gs://<your-gcs-bucket-name>/product_hunt_data/products_category/*`
-<p align="center">
-  <img src="https://github.com/maneshkarun/producthunt-products-etl/blob/main/images/gcs_to_bigquery_category.png"
-    alt="GCS to BigQuery Category SQL Block"
-    style="margin-right: 10px;"> 
-  <!-- - In the right pane, click on the variables tab and edit the variable `gcs_filepath_products_category`
-  - Change the value to `gs://<your-gcs-bucket-name>/product_hunt_data/product_hunt_products_category/*` modify with your GCS bucket name. Make sure that the value of the variable is enclosed in quotes. -->
-
+    ```bash
+      cd producthunt-etl-pipeline/dbt/producthunt_dbt
+      dbt deps
+    ```
   - Go the `Pipelines` tab and click on the `producthunt_products_etl` pipeline > `Edit pipeline` and go to last node of the pipeline `trigger_category_pipeline` under more options, click `Execute with all upstream blocks`
 
 This should also trigger the remaining two pipelines `producthunt_products_category_etl` and `dbt_transformation` automatically. Go back to dashboard and check the status of the pipelines.
 
-This might take a while to complete [~ 10 mins]. Once the pipelines are completed, you can check the data in the BigQuery and GCS bucket.
+This might take a while to complete [~ 8 - 10 mins]. Once the pipelines are completed, you can check the data in the BigQuery and GCS bucket.
 
 - **Folder name in GCS bucket**: `product_hunt_data`
 - **BigQuery Dataset**: `product_hunt`
