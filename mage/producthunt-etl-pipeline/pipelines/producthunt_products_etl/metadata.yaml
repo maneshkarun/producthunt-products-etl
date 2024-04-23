@@ -26,13 +26,13 @@ blocks:
   language: python
   name: upload_to_gcs_products
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: data_exporter
   upstream_blocks:
   - load_from_kaggle
   uuid: upload_to_gcs_products
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: null
   configuration:
     data_provider: bigquery
@@ -56,7 +56,7 @@ blocks:
   upstream_blocks:
   - upload_to_gcs_products
   uuid: gcs_to_bigquery_products_sql
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: null
   configuration:
     data_provider: bigquery
