@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: staging
-    database: evident-time-410307
+    database: "{{ env_var('GCP_PROJECT_ID') }}"
     schema: product_hunt
 
     tables:
